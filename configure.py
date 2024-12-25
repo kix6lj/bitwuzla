@@ -33,7 +33,6 @@ def configure_build(builddir, opts):
     cmd.append(builddir)
     cmd.extend(opts)
     info(' '.join(cmd))
-    print(cmd)
     subprocess.run(cmd)
     info(f'compile Bitwuzla with: cd {builddir} && meson compile')
 

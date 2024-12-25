@@ -33,7 +33,7 @@ if get_option('testing').auto()
   if get_option('buildtype') == 'release'
     enable_testing = false
   elif get_option('buildtype') in ['debug', 'debugoptimized']
-    enable_testing = true
+    enable_testing = false
   endif
 else
   enable_testing = get_option('testing').enabled()

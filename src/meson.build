@@ -65,6 +65,10 @@ if get_option('fpexp')
   cpp_args += ['-DBZLA_USE_FPEXP']
 endif
 
+if get_option('debug')
+  cpp_args += ['-g']
+endif
+
 # ---
 # Generate config.h
 # ---
