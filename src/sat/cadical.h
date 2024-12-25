@@ -15,6 +15,7 @@
 #include <memory>
 
 #include "sat/sat_solver.h"
+#include "lib/rng/rng.h"
 #include "terminator.h"
 
 namespace bzla::sat {
@@ -33,7 +34,7 @@ class CadicalTerminator : public CaDiCaL::Terminator
 class Cadical : public SatSolver
 {
  public:
-  Cadical();
+  Cadical(bool randsolve, uint32_t seed);
 
   void add(int32_t lit) override;
   void assume(int32_t lit) override;
@@ -48,6 +49,7 @@ class Cadical : public SatSolver
  private:
   std::unique_ptr<CaDiCaL::Solver> d_solver   = nullptr;
   std::unique_ptr<CaDiCaL::Terminator> d_term = nullptr;
+  RNG rng;
 };
 
 }  // namespace bzla::sat

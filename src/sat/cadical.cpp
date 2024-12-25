@@ -9,6 +9,7 @@
  */
 
 #include "sat/cadical.h"
+#include <random>
 
 namespace bzla::sat {
 
@@ -28,11 +29,13 @@ CadicalTerminator::terminate()
 
 /* Cadical public ----------------------------------------------------------- */
 
-Cadical::Cadical()
+Cadical::Cadical(bool randsolve, uint32_t seed) : rng(seed)
 {
   d_solver.reset(new CaDiCaL::Solver());
   d_solver->set("shrink", 0);
   d_solver->set("quiet", 1);
+  d_solver->set("randsolve", randsolve);
+  d_solver->set("seed", rng.pick<uint32_t>());
 }
 
 void

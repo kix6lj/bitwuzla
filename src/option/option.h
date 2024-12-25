@@ -32,6 +32,7 @@ enum class Option
   MEMORY_LIMIT,               // numeric
   NTHREADS,                   // numeric
   RELEVANT_TERMS,             // bool
+  RAND_SOLVE,                 // bool
 
   BV_SOLVER,      // enum
   REWRITE_LEVEL,  // numeric
@@ -474,6 +475,7 @@ class Options
   OptionNumeric memory_limit;
   OptionNumeric nthreads;
   OptionBool relevant_terms;
+  OptionBool rand_solve;
 
   // Bitwuzla-specific options
   OptionModeT<BvSolver> bv_solver;

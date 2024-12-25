@@ -17,6 +17,7 @@
 namespace bzla::sat {
 
 SatSolver* new_sat_solver(const option::Options& options);
+SatSolver* new_deterministic_sat_solver(const option::Options& options);
 }
 
 #endif

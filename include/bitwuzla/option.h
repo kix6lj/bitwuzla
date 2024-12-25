@@ -117,6 +117,12 @@ enum ENUM(Option)
    *  @warning This is an expert option to configure theory solvers.
    */
   EVALUE(RELEVANT_TERMS),
+  /*! **Whether searching for random solutions.**
+   *  Values:
+   *  * **1**: enable
+   *  * **0**: disable [**default**]
+   */
+  EVALUE(RAND_SOLVE),
 
   /* ---------------- Bitwuzla-specific Options ----------------------------- */
 

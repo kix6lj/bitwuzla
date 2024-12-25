@@ -173,6 +173,11 @@ Options::Options()
                      false,
                      "consider relevant terms only when checking",
                      "relevant-terms"),
+      rand_solve(this,
+                 Option::RAND_SOLVE,
+                 false,
+                 "whether to get random solution",
+                 "rand-solve"),
 
       // Bitwuzla-specific
       bv_solver(this,
@@ -733,6 +738,7 @@ Options::data(Option opt)
     case Option::MEMORY_LIMIT: return &memory_limit;
     case Option::NTHREADS: return &nthreads;
     case Option::RELEVANT_TERMS: return &relevant_terms;
+    case Option::RAND_SOLVE: return &rand_solve;
 
     case Option::BV_SOLVER: return &bv_solver;
     case Option::REWRITE_LEVEL: return &rewrite_level;
