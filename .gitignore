@@ -4,5 +4,6 @@ build/
 
 # Hides the generated content in subprojects
 subprojects/*
+!subprojects/cadical
 !/subprojects/packagefiles
 !subprojects/*.wrap

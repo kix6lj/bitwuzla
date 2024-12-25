@@ -6,22 +6,24 @@ cpp_compiler = meson.get_compiler('cpp')
 # ---
 
 # External dependencies
-gmp_dep = dependency('gmp',
-                     version: '>=6.1',
-                     required: true,
-                     static: build_static)
-
-
+# gmp_dep = dependency('gmp',
+#                      version: '>=6.1',
+#                      required: true,
+#                      dir
+#                      static: build_static)
+gmp_inc = include_directories(gmp_inc_path)
+gmp_lib = cpp_compiler.find_library('gmp',
+                                dirs: gmp_lib_path,
+                                has_headers: 'gmpxx.h',
+                                header_include_directories: gmp_inc,
+                                required: true,
+                                static: false)
+gmp_dep = declare_dependency(include_directories: gmp_inc, dependencies: gmp_lib)
 # Subproject dependencies
 
 # CaDiCaL does not provide pkg-config to find dependency
-cadical_dep = cpp_compiler.find_library('cadical',
-                                        has_headers: 'cadical.hpp',
-                                        static: build_static,
-                                        required: false)
-if not cadical_dep.found()
-  cadical_dep = dependency('cadical', required: true)
-endif
+cadical_proj = subproject('cadical')
+cadical_dep = cadical_proj.get_variable('cadical_dep')
 
 cms_dep = dependency('cryptominisat5',
                      version: '5.11.21',
@@ -228,6 +230,16 @@ sources = files([
 bitwuzla_inc = include_directories('../include', 'lib')
 
 bitwuzla_lib = library('bitwuzla',
+                      sources + git_config_h,
+                      include_directories: bitwuzla_inc,
+                      link_with: [util_lib, support_libs],
+                      dependencies: dependencies,
+                      soversion: bitwuzla_lib_soversion,
+                      install_rpath: install_rpath,
+                      install: true,
+                      cpp_args: cpp_args)
+
+bitwuzla_slib = shared_library('bitwuzla_shared',
                       sources + git_config_h,
                       include_directories: bitwuzla_inc,
                       link_with: [util_lib, support_libs],

@@ -1,0 +1,3 @@
+[submodule "cadical"]
+	path = subprojects/cadical
+	url = git@github.com:kix6lj/cadical.git

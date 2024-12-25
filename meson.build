@@ -25,6 +25,9 @@ build_static = get_option('default_library') == 'static' \
                and get_option('b_sanitize') == 'none' \
                and not enable_python
 
+gmp_inc_path = get_option('gmp_inc_path')
+gmp_lib_path = get_option('gmp_lib_path')
+
 # Configure testing
 if get_option('testing').auto()
   if get_option('buildtype') == 'release'

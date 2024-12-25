@@ -33,6 +33,7 @@ def configure_build(builddir, opts):
     cmd.append(builddir)
     cmd.extend(opts)
     info(' '.join(cmd))
+    print(cmd)
     subprocess.run(cmd)
     info(f'compile Bitwuzla with: cd {builddir} && meson compile')
 
@@ -77,6 +78,8 @@ def main():
                     help='shared library')
     ap.add_argument('--static', action='store_true',
                     help='static library')
+    ap.add_argument('--gmp_inc_path', required=True, help='GMP include path')
+    ap.add_argument('--gmp_lib_path', required=True, help='GMP library path')
     bool_opt(ap, 'assertions', 'assertions')
     bool_opt(ap, 'asan', 'address sanitizer')
     bool_opt(ap, 'ubsan', 'undefined behavior sanitizer')
@@ -103,6 +106,8 @@ def main():
 
     build_opts = []
     sanitize = set()
+    build_opts.append(f'-Dgmp_inc_path={args.gmp_inc_path}')
+    build_opts.append(f'-Dgmp_lib_path={args.gmp_lib_path}')
     if args.buildtype:
         build_opts.append(f'-Dbuildtype={args.buildtype}')
     if args.prefix:
