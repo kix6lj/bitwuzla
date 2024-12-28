@@ -65,7 +65,7 @@ if get_option('fpexp')
   cpp_args += ['-DBZLA_USE_FPEXP']
 endif
 
-if get_option('debug')
+if get_option('buildtype') in ['debug', 'debugoptimized']
   cpp_args += ['-g']
 endif
 

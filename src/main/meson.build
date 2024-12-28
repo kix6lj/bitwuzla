@@ -16,4 +16,5 @@ bitwuzla_bin = executable('bitwuzla', sources,
                           dependencies: [bitwuzla_dep, thread_dep],
                           link_args: link_args,
                           install_rpath: install_rpath,
+                          cpp_args: cpp_args,
                           install: true)
