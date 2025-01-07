@@ -291,6 +291,22 @@ Node::node_info() const
   return d_data->info();
 }
 
+void
+Node::set_branch_config(const std::vector<float> &config) 
+{
+  d_data->set_config(config);
+}
+
+void
+Node::set_branch_config(uint64_t index, float value) {
+  d_data->set_config(index, value);
+}
+
+float
+Node::get_branch_config(uint64_t index) const {
+  return d_data->get_config_value(index);
+}
+
 /* --- Node private -------------------------------------------------------- */
 
 Node::Node(node::NodeData* data) : d_data(data)

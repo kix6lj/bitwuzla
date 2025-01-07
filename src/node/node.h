@@ -206,6 +206,12 @@ class Node
   /** @return Node info flags. */
   const node::NodeInfo& node_info() const;
 
+  void set_branch_config(const std::vector<float> &config);
+
+  void set_branch_config(uint64_t index, float value);
+
+  float get_branch_config(uint64_t index) const;
+
  private:
   Node(node::NodeData* data);
 

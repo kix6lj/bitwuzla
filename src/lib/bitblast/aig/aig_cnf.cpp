@@ -204,6 +204,10 @@ AigCnfEncoder::_encode(const AigNode& aig)
         ++d_statistics.num_clauses;
         ++d_statistics.num_literals;
       }
+
+      if (cur->is_const()) {
+        d_sat_solver.set_config(cur->get_id(), cur->get_config());
+      }
     }
     else
     {

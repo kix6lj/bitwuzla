@@ -73,6 +73,12 @@ AigBitblaster::bitblast(const Node& t)
           it->second = type.is_bool()
                            ? d_bitblaster.bv_constant(1)
                            : d_bitblaster.bv_constant(type.bv_size());
+          
+          // setting configuration for bv_constant
+          if (!type.is_bool())
+            for (size_t i = 0; i < it->second.size(); ++i)
+              it->second[i].set_config(cur.get_branch_config(i));
+
           break;
 
         case Kind::NOT:

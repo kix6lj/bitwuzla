@@ -81,6 +81,11 @@ Cadical::solve()
 }
 
 void
+Cadical::set_config(int32_t lit, float value) {
+  d_solver->set_config(lit, value);
+}
+
+void
 Cadical::configure_terminator(Terminator* terminator)
 {
   d_term.reset(new CadicalTerminator(terminator));

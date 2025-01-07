@@ -53,6 +53,10 @@ class AigNode
 
   uint32_t parents() const;
 
+  void set_config(float value);
+
+  float get_config() const;
+  
  private:
   static const int64_t s_true_id = 1;
 
@@ -122,6 +126,8 @@ class AigNodeData
   uint32_t d_refs = 0;
   /** Number of parents. */
   uint32_t d_parents = 0;
+  /** Branch config value. */
+  float d_config = 0.5;
   /** Left child of AND gate. */
   AigNode d_left;
   /** Right child of AND gate. */
@@ -183,6 +189,16 @@ AigNode::parents() const
 {
   assert(!is_null());
   return d_data->d_parents;
+}
+
+inline void 
+AigNode::set_config(float value) {
+  d_data->d_config = value;
+}
+
+inline float 
+AigNode::get_config() const {
+  return d_data->d_config;
 }
 
 inline uint64_t

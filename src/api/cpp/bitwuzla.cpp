@@ -1102,6 +1102,16 @@ Term::value(uint8_t base) const
   return std::make_tuple(sign.str(base), exp.str(base), sig.str(base));
 }
 
+void
+Term::set_branch_config(const std::vector<float> &config) 
+{
+  BITWUZLA_CHECK_NOT_NULL(d_node);
+  BITWUZLA_CHECK_TERM_IS_BV(*this);
+  BITWUZLA_CHECK(d_node->is_const()) << "expect a constant term";
+
+  d_node->set_branch_config(config);
+}
+
 bool
 operator==(const Term &a, const Term &b)
 {

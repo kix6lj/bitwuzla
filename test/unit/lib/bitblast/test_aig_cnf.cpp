@@ -76,6 +76,8 @@ class DummySatSolver : public bitblast::SatInterface
 
   std::vector<std::vector<int64_t>>& get_clauses() { return d_clauses; }
 
+  void set_config(int64_t lit, float value) {}
+  
  private:
   int64_t d_max_var = 0;
   std::vector<int64_t> d_clause;

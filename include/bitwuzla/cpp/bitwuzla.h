@@ -767,6 +767,16 @@ class Term
   template <class T>
   T value(uint8_t base = 2) const;
 
+  /**
+   * @brief Set the branching configuration for a BV const per bit.
+   * 
+   * @note This function can only be called on a const BV term. The size of 
+   *       `config` vector must match the size of the bitvector, the value 
+   *       must be in [0, 1]. If a bit does not have any branching preference,
+   *       then the value should be 0.5.
+   */
+  void set_branch_config(const std::vector<float> &config);
+
  private:
   /** Convert vector of terms to internal nodes. */
   static std::vector<bzla::Node> term_vector_to_nodes(

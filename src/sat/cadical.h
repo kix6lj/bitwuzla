@@ -43,6 +43,7 @@ class Cadical : public SatSolver
   int32_t fixed(int32_t lit) override;
   Result solve() override;
   void configure_terminator(Terminator* terminator) override;
+  void set_config(int32_t lit, float value) override;
   const char *get_name() const override { return "CaDiCaL"; }
   const char *get_version() const override;
 

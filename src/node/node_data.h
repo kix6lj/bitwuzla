@@ -49,6 +49,12 @@ struct PayloadSymbol
   std::optional<std::string> d_symbol;
 };
 
+/** Payload for constant's config. */
+struct PayloadConfig
+{
+  std::optional<std::vector<float>> d_config;
+};
+
 /**
  * Node data base class.
  *
@@ -186,6 +192,29 @@ class NodeData
    */
   std::optional<std::reference_wrapper<const std::string>> get_symbol() const;
 
+  /**
+   * @brief Set the config directly from the config vector
+   * 
+   * @param config 
+   */
+  void set_config(const std::vector<float> &config);
+
+  /**
+   * @brief Set the config value at the index-th bit
+   * 
+   * @param index 
+   * @param val 
+   */
+  void set_config(uint64_t index, float val);
+
+  /**
+   * @brief Get the config value at the index-th bit
+   * 
+   * @param index 
+   * @return float 
+   */
+  float get_config_value(uint64_t index) const;
+
   /** Increase the reference count by one. */
   void inc_ref() { ++d_refs; }
 
@@ -280,6 +309,18 @@ class NodeData
     return *reinterpret_cast<const PayloadSymbol*>(&d_payload);
   }
 
+  PayloadConfig &payload_config()
+  {
+    return const_cast<PayloadConfig&>(std::as_const(*this).payload_config());
+  }
+
+  const PayloadConfig &payload_config() const
+  {
+    assert(d_kind == Kind::CONSTANT || d_kind == Kind::VARIABLE);
+    size_t offset = sizeof(PayloadSymbol);
+    return *reinterpret_cast<const PayloadConfig*>(
+        reinterpret_cast<const unsigned char*>(&d_payload) + offset);
+  }
   /** Garbage collect this node. */
   void gc();
 

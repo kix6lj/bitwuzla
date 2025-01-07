@@ -43,6 +43,9 @@ class BvBitblastSolver::BitblastSatSolver : public bitblast::SatInterface
     return d_solver.value(lit) == 1 ? true : false;
   }
 
+  void set_config(int64_t lit, float value) override {
+    d_solver.set_config(lit, value);
+  }
  private:
   sat::SatSolver& d_solver;
 };

@@ -24,6 +24,7 @@ NodeData::alloc(Kind kind, const std::optional<std::string>& symbol)
 {
   size_t size         = sizeof(NodeData);
   size_t payload_size = sizeof(PayloadSymbol);
+  payload_size        += sizeof(PayloadConfig);
 
   // Subtract size of payload placeholder in NodeData from payload size.
   size_t reserved_size = sizeof(NodeData::d_payload);
@@ -144,6 +145,9 @@ NodeData::~NodeData()
   {
     auto& payload = payload_symbol();
     payload.d_symbol.~optional();
+    
+    auto& p_config = payload_config();
+    p_config.d_config.~optional();
   }
 }
 
@@ -212,6 +216,40 @@ std::optional<std::reference_wrapper<const std::string>>
 NodeData::get_symbol() const
 {
   return d_nm->get_symbol(this);
+}
+
+void
+NodeData::set_config(const std::vector<float> &config) {
+  assert(get_type().is_bv());
+  assert(get_kind() == Kind::CONSTANT);
+
+  auto &payload = payload_config();
+  payload.d_config = config;
+}
+
+void
+NodeData::set_config(uint64_t index, float val) {
+  assert(get_type().is_bv());
+  assert(get_kind() == Kind::CONSTANT);
+  assert(index < get_type().bv_size());
+  
+  auto &payload = payload_config();
+  if (!payload.d_config.has_value())
+    payload.d_config = std::vector<float>(0.5f, get_type().bv_size());
+
+  payload.d_config.value()[index] = val;
+}
+
+float
+NodeData::get_config_value(uint64_t index) const {
+  assert(get_type().is_bv());
+  assert(get_kind() == Kind::CONSTANT);
+  assert(index < get_type().bv_size());
+
+  auto &payload = payload_config();
+  if (!payload.d_config.has_value())
+    return 0.5f;
+  return payload.d_config.value()[index];
 }
 
 NodeData::iterator

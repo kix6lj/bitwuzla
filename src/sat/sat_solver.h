@@ -67,6 +67,7 @@ class SatSolver
    */
   virtual void configure_terminator(Terminator *terminator) = 0;
 
+  virtual void set_config([[maybe_unused]] int32_t lit, [[maybe_unused]] float value) {};
   // virtual int32_t repr(int32_t) = 0;
 
   /**

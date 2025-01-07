@@ -33,6 +33,8 @@ class SatInterface
   virtual void add_clause(const std::initializer_list<int64_t>& literals) = 0;
 
   virtual bool value(int64_t lit) = 0;
+
+  virtual void set_config(int64_t lit, float value) = 0;
 };
 
 class AigCnfEncoder
