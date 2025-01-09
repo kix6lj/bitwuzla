@@ -35,6 +35,10 @@ Cadical::Cadical(bool randsolve, uint32_t seed) : rng(seed)
   d_solver->set("shrink", 0);
   d_solver->set("quiet", 1);
   d_solver->set("randsolve", randsolve);
+  // Since we only controls EVSIDS, use stablizeonly=1.
+  // When VMTF is also controlled by our configs, this parameter
+  // setting can be removed.
+  d_solver->set("stabilizeonly", 1);
   d_solver->set("seed", rng.pick<uint32_t>());
 }
 

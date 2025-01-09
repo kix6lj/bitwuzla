@@ -75,9 +75,12 @@ AigBitblaster::bitblast(const Node& t)
                            : d_bitblaster.bv_constant(type.bv_size());
           
           // setting configuration for bv_constant
-          if (!type.is_bool())
-            for (size_t i = 0; i < it->second.size(); ++i)
-              it->second[i].set_config(cur.get_branch_config(i));
+          if (!type.is_bool()) {
+            // Note: bv_constant() returns a MSB encoded vector
+            size_t size = it->second.size();
+            for (size_t i = 0; i < size; ++i)
+              it->second[size - i - 1].set_config(cur.get_branch_config(i));
+          }
 
           break;
 

@@ -19,7 +19,6 @@
 #include "solver/fp/symfpu_nm.h"  // Temporary for setting SymFpuNM
 #include "util/exceptions.h"
 #include "util/resources.h"
-
 namespace bzla {
 
 using namespace node;
