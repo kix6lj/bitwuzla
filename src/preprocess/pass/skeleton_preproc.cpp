@@ -92,10 +92,6 @@ PassSkeletonPreproc::apply(AssertionVector& assertions)
   }
 
   Result res;
-  {
-    util::Timer timer(d_stats.time_sat);
-    res = d_sat_solver->solve();
-  }
 
   NodeManager& nm = d_env.nm();
   res             = d_sat_solver->solve();
