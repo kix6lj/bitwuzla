@@ -35,7 +35,7 @@ Cadical::Cadical(bool randsolve, uint32_t seed) : rng(seed)
   d_solver->set("shrink", 0);
   d_solver->set("quiet", 1);
   d_solver->set("randsolve", randsolve);
-  d_solver->set("seed", rng.pick<uint32_t>());
+  d_solver->set("seed", rng.pick<int32_t>(0, INT_MAX));
 }
 
 void
