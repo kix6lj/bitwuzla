@@ -243,7 +243,7 @@ NodeData::set_config(uint64_t index, float val) {
 float
 NodeData::get_config_value(uint64_t index) const {
   assert(get_type().is_bv());
-  // assert(get_kind() == Kind::CONSTANT);
+  assert(get_kind() == Kind::CONSTANT);
   assert(index < get_type().bv_size());
 
   auto &payload = payload_config();

@@ -316,7 +316,7 @@ class NodeData
 
   const PayloadConfig &payload_config() const
   {
-    // assert(d_kind == Kind::CONSTANT || d_kind == Kind::VARIABLE);
+    assert(d_kind == Kind::CONSTANT || d_kind == Kind::VARIABLE);
     size_t offset = sizeof(PayloadSymbol);
     return *reinterpret_cast<const PayloadConfig*>(
         reinterpret_cast<const unsigned char*>(&d_payload) + offset);
