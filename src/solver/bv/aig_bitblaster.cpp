@@ -77,7 +77,7 @@ AigBitblaster::bitblast(const Node& t)
           // setting configuration for bv_constant
           if (!type.is_bool())
             for (size_t i = 0; i < it->second.size(); ++i)
-              it->second[i].set_config(cur.get_branch_config(i));
+              it->second[it->second.size() - i - 1].set_config(cur.get_branch_config(i));
 
           break;
 
