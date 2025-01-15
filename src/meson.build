@@ -142,7 +142,7 @@ util_lib = static_library('bzlautil', sources_util, cpp_args: cpp_args)
 # ---
 
 subdir('lib')
-support_libs = [bitblast_lib, bitvector_lib, local_search_lib]
+support_libs = [bitblast_lib, bitvector_lib, local_search_lib, rng_lib]
 
 # ---
 # Build Bitwuzla library

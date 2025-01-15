@@ -58,6 +58,12 @@ class AigCnfEncoder
    * */
   void encode(const AigNode& node, bool top_level = false);
 
+  /**
+   * @brief Return the value of this AigNode after SAT solving
+   * 
+   * @param node 
+   * @return int32_t, -1(false), 0(arbitrary), 1(true)
+   */
   int32_t value(const AigNode& node);
 
   /** @return CNF statistics. */

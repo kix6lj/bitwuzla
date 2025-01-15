@@ -28,9 +28,11 @@ rng_sources = [
 ]
 
 # RNG support library
-rng_lib = static_library('bzlarng',
+rng_lib = library('bzlarng',
                   sources: rng_sources,
-                  dependencies: gmp_dep)
+                  dependencies: gmp_dep,
+                  install_rpath: install_rpath,
+                  install: true)
 
 # Bitwuzla bit-vector, bit-blast and local search libraries
 bitvector_lib = library('bitwuzlabv',

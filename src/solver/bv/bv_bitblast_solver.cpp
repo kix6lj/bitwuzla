@@ -155,7 +155,17 @@ BvBitblastSolver::value(const Node& term)
   BitVector val(type.bv_size());
   for (size_t i = 0, size = bits.size(); i < size; ++i)
   {
-    val.set_bit(size - 1 - i, d_cnf_encoder->value(bits[i]) == 1);
+    int bit_val = d_cnf_encoder->value(bits[i]);
+
+    if (bit_val != 0)
+      val.set_bit(size - 1 - i, bit_val == 1);
+    else {
+      float p = d_env.d_rng.pick<float>(0.0, 1.0);
+      if (term.is_const())
+        val.set_bit(size - 1 - i, p < term.get_branch_config(size - 1 - i));
+      else
+        val.set_bit(size - 1 - i, p < 0.5);
+    }
   }
   return nm.mk_value(val);
 }

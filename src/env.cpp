@@ -23,7 +23,8 @@ Env::Env(NodeManager& nm,
       d_rewriter(*this, options.rewrite_level()),
       d_logger(options.log_level(),
                options.verbosity(),
-               name.empty() ? "" : "(" + name + ")")
+               name.empty() ? "" : "(" + name + ")"),
+      d_rng(d_options.seed())
 {
   d_options.finalize();
 }

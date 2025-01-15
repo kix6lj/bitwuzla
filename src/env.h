@@ -16,6 +16,7 @@
 #include "rewrite/rewriter.h"
 #include "util/logger.h"
 #include "util/statistics.h"
+#include "rng/rng.h"
 
 namespace bzla {
 
@@ -80,6 +81,9 @@ class Env
   Terminator* d_terminator = nullptr;
   /** The associated logger class. */
   util::Logger d_logger;
+  
+ public:
+  RNG d_rng;
 };
 
 }  // namespace bzla

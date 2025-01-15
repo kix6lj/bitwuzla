@@ -14,6 +14,7 @@
 #include <functional>
 #include <unordered_set>
 #include <vector>
+#include <iostream>
 
 namespace bzla::bitblast {
 
@@ -73,7 +74,7 @@ AigCnfEncoder::value(const AigNode& aig)
     return -1;
   }
 
-  int32_t val = -1;
+  int32_t val = 0;
   if (is_encoded(aig))
   {
     val = d_sat_solver.value(std::abs(aig.get_id())) ? 1 : -1;

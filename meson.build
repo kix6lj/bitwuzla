@@ -9,7 +9,6 @@ project('bitwuzla',
     'buildtype=release',
     'b_ndebug=if-release',
     'default_library=static',
-    'strip=true',
     'warning_level=3'
   ]
 )
